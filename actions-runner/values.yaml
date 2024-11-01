@@ -1,0 +1,11 @@
+name: ""
+namespace: ""
+spec: ""
+autoscaling:
+  enabled: false
+  scheduledOverrides:
+    startTime: ""
+    endTime: ""
+    frequecy: ""
+    minReplicas: 1
+  minReplicas: 1

@@ -1,0 +1,21 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: {{ .Values.name }}-autoscaler
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    kind: RunnerDeployment
+    name: {{ .Values.name }}
+  scheduledOverrides:
+  - startTime: {{ .Values.autoscaling.scheduledOverrides.startTime }}
+    endTime: {{ .Values.autoscaling.scheduledOverrides.endTime }}
+    recurrenceRule:
+      frequency: {{ .Values.autoscaling.scheduledOverrides.frequency }}
+      untilTime: {{ .Values.autoscaling.scheduledOverrides.untilTime }}
+    minReplicas: {{ .Values.autoscaling.scheduledOverrides.minReplicas }} #minreplicas count on scheduling 
+  minReplicas: {{ .Values.autoscaling.minReplicas }} #nomarlly minreplicas
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }} #nomarlly maxreplicas
+{{- end }}
+
