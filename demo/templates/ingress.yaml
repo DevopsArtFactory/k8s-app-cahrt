@@ -16,7 +16,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-  namespace: istio-system
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "demo.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
@@ -50,7 +50,7 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: istio-ingressgateway
+                name: {{ $fullName }}
                 port:
                   number: 80
               {{- else }}
