@@ -13,7 +13,7 @@ spec:
   sources:
     - repoURL: {{ .Values.helmChartRepoURL }}
       targetRevision: main
-      path: demo
+      path: demo-nlb
       helm:
         valueFiles:
           - $values/{{ .Values.ClusterName }}/demo/values-nlb.yaml
