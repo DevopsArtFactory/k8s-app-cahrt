@@ -12,7 +12,7 @@ spec:
   project: default
   sources:
     - repoURL: {{ .Values.helmChartRepoURL }}
-      targetRevision: 0.0.1
+      targetRevision: main
       path: demo
       helm:
         valueFiles:
