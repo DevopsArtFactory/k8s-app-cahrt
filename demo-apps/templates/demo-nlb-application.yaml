@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-nlb
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - repoURL: {{ .Values.helmChartRepoURL }}
+      targetRevision: 0.0.1
+      path: demo
+      helm:
+        valueFiles:
+          - $values/{{ .Values.ClusterName }}/demo/values-nlb.yaml
+          - $values/{{ .Values.ClusterName }}/demo/image.yaml
+    - repoURL: {{ .Values.helmChartValueURL }}
+      targetRevision: main
+      ref: values
+  syncPolicy:
+    {{- .Values.syncPolicy | toYaml | nindent 4 }}
