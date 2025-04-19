@@ -22,6 +22,6 @@ spec:
     namespace: {{ .Values.namespace }}
   {{- with .Values.syncPolicy }}
   syncPolicy:
-    {{- toYaml . | nindent 6 }}
+    {{- toYaml . | nindent 4 }}
   {{- end -}}
     
