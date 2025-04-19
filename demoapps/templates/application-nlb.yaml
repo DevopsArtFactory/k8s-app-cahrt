@@ -21,7 +21,7 @@ spec:
     server: {{ .Values.clusterEndpoint }}
     namespace: {{ .Values.namespace }}
   {{- with .Values.syncPolicy }}
-    syncPolicy:
+  syncPolicy:
     {{- toYaml . | nindent 6 }}
   {{- end -}}
     
