@@ -1,0 +1,14 @@
+
+clusterName: "testdapne2-iqsn"
+namespace: "demoapps"
+repoRepoURL: "https://github.com/DevopsArtFactory/eks-k8s-app-cahrt"
+repoTargetRevision: "main"
+appChartName: "demo"
+valueRepoURL: "https://github.com/DevopsArtFactory/eks-k8s-cahrt-value"
+valueTargetRevision: "main"
+syncPolicy: 
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true

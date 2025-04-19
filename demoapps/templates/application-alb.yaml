@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.clusterName }}-demo-alb-application
+  namespace: argocd
+spec:
+  project: {{ .Values.clusterName }}-application
+  sources:
+    - repoURL: {{ .Values.repoRepoURL }}
+      targetRevision: {{ .Values.repoTargetRevision }}
+      path: {{ .Values.appChartName }}
+      helm:
+        valueFiles:
+          - $values/{{ .Values.clusterName }}/{{ .Values.namespace }}/values-alb.yaml
+          - $values/{{ .Values.clusterName }}/{{ .Values.namespace }}/image.yaml
+    - repoURL: {{ .Values.valueRepoURL }}
+      targetRevision: {{ .Values.valueTargetRevision }}
+      ref: values
+  destination:
+    server: {{ .Values.clusterEndpoint }}
+    namespace: {{ .Values.namespace }}
+  {{- with .Values.syncPolicy }}
+    syncPolicy:
+    {{- toYaml . | nindent 6 }}
+  {{- end -}}
+    
